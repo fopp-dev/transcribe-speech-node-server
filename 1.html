@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+    <script>
+         const _board = [
+            ['1', '2', '3', '4', '5', '6', '7', '8', '1'],
+            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            ['1', '.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+            ['.', '.', '.', '.', '.', '.', '.', '.', '.'],
+        ];
+
+        isValidSudoku(_board);
+
+        function isValidSudoku(grid) {
+            let seenRow = {},
+                seenCol = {},
+                seenSubBox = {},
+                seen = {}
+
+
+            for (let row = 0; row < 9; row++) {
+                for (let col = 0; col < 9; col++) {
+                    let value = grid[row][col];
+                    if (!(value === '.')) {
+                        let rowKey = `${row}-${value}`,
+                            colKey = `${col}-${value}`,
+                            boxKey = `${Math.floor(row/3)}-${value}-${Math.floor(col/3)}`
+
+                        if (seenRow[rowKey] || seenCol[colKey] || seenSubBox[boxKey]) {
+                            console.log('false');
+                            return false;
+                        }               
+                        seenRow[rowKey] = true;
+                        seenCol[colKey] = true;
+                        seenSubBox[boxKey] = true;
+                    }
+                }
+            }
+            console.log('true');
+            return true;
+
+        }
+    </script>
+</body>
+</html>
+
